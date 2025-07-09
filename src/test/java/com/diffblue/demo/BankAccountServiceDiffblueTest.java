@@ -18,6 +18,28 @@ class BankAccountServiceDiffblueTest {
     /**
      * Test {@link BankAccountService#BankAccountService(double)}.
      * <ul>
+     *   <li>When ten.</li>
+     *   <li>Then return Balance is ten.</li>
+     * </ul>
+     * <p>
+     * Method under test: {@link BankAccountService#BankAccountService(double)}
+     */
+    @Test
+    @DisplayName("Test new BankAccountService(double); when ten; then return Balance is ten")
+    @Tag("MaintainedByDiffblue")
+    void testNewBankAccountService_whenTen_thenReturnBalanceIsTen3() {
+        // Arrange and Act
+        BankAccountService actualBankAccountService = new BankAccountService(10.0d);
+
+        // Assert
+        assertEquals(10.0d, actualBankAccountService.getBalance());
+        assertFalse(actualBankAccountService.isOverdrawn());
+        assertTrue(actualBankAccountService.getTransactions().isEmpty());
+    }
+
+    /**
+     * Test {@link BankAccountService#BankAccountService(double)}.
+     * <ul>
      *   <li>When {@code -1.0E-10}.</li>
      *   <li>Then throw {@link IllegalArgumentException}.</li>
      * </ul>
