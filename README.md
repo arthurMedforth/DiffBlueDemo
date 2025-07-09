@@ -1,58 +1,31 @@
 # DiffBlue Cover – Exploration and Review
 
-This project explores the use of **DiffBlue Cover** in a real-world Java application, specifically using a `BankAccountService` within a **Maven** setup. It's intended as both a learning tool for new team members and an evaluation of how Cover fits into the developer workflow when using IntelliJ.
+I use a real-world example of a `BankAccountService` to demonstrate Java in the context of Maven projects for new resources on my team. In this project (which you can hopefully access in the link above), I explored how DiffBlue Cover works and fits into my experience as a developer. I focused on the following areas:
 
 ---
 
-## Project Context
+## Set-up
 
-The code in this repository demonstrates the integration of DiffBlue Cover with an existing Java project. The example centers around `BankAccountService` and serves as a reference point for team members learning about:
+**How easy is it to navigate both the DiffBlue and IntelliJ documentation to add Cover to an existing project?**
 
-- Java + Maven development
-- Automated test generation with AI tools
-- Working with DiffBlue Cover in IntelliJ
-
----
-
-## Setup Experience
-
-### Installation & Initial Integration
-
-**Question:** _How easy is it to navigate both DiffBlue and IntelliJ documentation to add Cover to an existing project?_
-
-**Finding:**  
-Setup was smooth and intuitive. The DiffBlue plugin integrates directly into the IntelliJ UI, and it’s obvious where and how to use it:
-
-- Clear instructions in the documentation
-- Easy identification of the Cover “homepage” inside IntelliJ
-- No friction in triggering test generation
+I had no trouble setting up DiffBlue and immediately liked the presence it has within the IDE – it is obvious from looking at your code how to trigger DiffBlue and clear where the ‘homepage’ for all things Cover is.
 
 ---
 
 ## Usability
 
-### 💡 Test Generation & Review Flow
+**Is the developer experience of test generation and review smooth and intuitive?**
 
-**Question:** _Is the developer experience of test generation and review smooth and intuitive?_
+I didn’t have any trouble locating where to instruct DiffBlue from, but did have the following comments after I created the tests the first time round:
 
-**Finding:**  
-Test creation was simple to initiate and the UI guidance was clear. However, a few observations stood out:
+- After running, reviewing, and accepting the tests I decided to clear away the most recent run result tab. In doing this, I was left with a blank DiffBlue tab, and even when reviewing the DiffBlue-created test file, couldn’t see any information.
+- It struck me that users could benefit from an informative DiffBlue hub to see when and what tests were run previously, etc.
 
-- After generating and reviewing tests, clearing the DiffBlue results tab left a blank view.
-- Even when reopening the test file, there was no visible summary of the generated tests.
-- This highlighted a potential need for a **central DiffBlue dashboard or hub** to show:
-    - Previously run tests
-    - Test generation timestamps
-    - Any changes introduced
+**As I add more functionality to my application, how easy is it to work with Cover on an ongoing, sustained development basis?**
 
-### Ongoing Development Workflow
+Once I had created tests for my application, I created more functionality to see if there is a response/alert from DiffBlue in IntelliJ. As far as I could see, this didn’t happen.
 
-**Question:** _As I add more functionality to my application, how easy is it to work with Cover on a sustained basis?_
-
-**Finding:**  
-After modifying the application to include additional methods, I was curious whether DiffBlue would prompt new test suggestions automatically. This did **not** happen through the UI.
-
-However, relevant information _was_ available in the logs:
+It occurred to me that there must be a way of reviewing which methods have been run as part of Cover’s analysis so that a new method is flagged. I was able to see this from the log file and wondered whether this information alone is exactly what I am describing above.
 
 ```text
 15:39:39.147 [DEBUG]  [Creating]    [pool-9-thread-3]   [com.diffblue.cover.r.c] Finished with MethodGroup: isOverdrawn, countOfTests: 1, countOfMethodsTested: 1 TestGenerationAccount: a[countOfRemoved=0, countOfUnchanged=0, countOfUpdated=0, countOfNew=1]
