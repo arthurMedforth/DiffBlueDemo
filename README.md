@@ -30,20 +30,18 @@ Once I had created tests for my application, I created more functionality to see
 
 It occurred to me that there must be a way of reviewing which methods have been run as part of Cover’s analysis so that a new method is flagged. I was able to see this from the log file and wondered whether this information alone is exactly what I am describing above:
 
+```text
+15:39:39.147 [DEBUG]  [Creating]    [pool-9-thread-3]   [com.diffblue.cover.r.c] Finished with MethodGroup: isOverdrawn, countOfTests: 1, countOfMethodsTested: 1 TestGenerationAccount: a[countOfRemoved=0, countOfUnchanged=0, countOfUpdated=0, countOfNew=1]
 15:39:39.147 [DEBUG] [Creating] [pool-9-thread-3] [com.diffblue.cover.r.c]
 Finished with MethodGroup: isOverdrawn, countOfTests: 1, countOfMethodsTested: 1
 TestGenerationAccount: a[countOfRemoved=0, countOfUnchanged=0, countOfUpdated=0, countOfNew=1]
+```
 
-
----
-
-## Performance
-
-**Do the tests created reflect/extend what was originally tested by the manually written unit tests?**
-
-**How does my experience of using GenAI to iteratively create tests differ when I use DiffBlue instead?**
-
-**Is Cover’s promise of accurate and 100% buildable tests enough to usurp the iterative generate-review-fix-build process of GenAI collaboration?**
+**After creating tests for the main class, I decided to create another function to see how DiffBlue behaves when it notices a coverage gap.**
+- I was surprised that there wasn’t some kind of notifier or highlighting around the conical flask icon to signify that DiffBlue had not yet run this new code.
+- I decided to run DiffBlue for that method anyway and subsequently came across the following when running class-level testing, having made no other changes:
+    - Cover doesn’t change tests if they are already adequate.
+    - Cover spotted that my `isOverDrawn()` method could usefully be tested within the initialization tests as an `assertFalse`.
 
 ---
 
@@ -61,12 +59,7 @@ The main driver behind this question is a more fundamental one:
 
 ## What I Liked
 
-- After creating tests for the main class, I decided to create another function to see how DiffBlue behaves when it notices a coverage gap.
-- I was surprised that there wasn’t some kind of notifier or highlighting around the conical flask icon to signify that DiffBlue had not yet run this new code.
-- I decided to run DiffBlue for that method anyway and subsequently came across the following when running class-level testing, having made no other changes:
-    - Cover doesn’t change tests if they are already adequate.
-    - Cover spotted that my `isOverDrawn()` method could usefully be tested within the initialization tests as an `assertFalse`.
-
+- 
 **Commit Message Suggestion**
 
 When I am committing tests, I have to add a description – could there not be some way of integrating this so that the plugin works to automatically populate commit messages for tests created by DiffBlue?
