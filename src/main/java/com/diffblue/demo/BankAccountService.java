@@ -1,57 +1,74 @@
 package com.diffblue.demo;
 
-/**
- * A simple bank account service that allows depositing, withdrawing,
- * and retrieving the current balance.
- *
- * <p>This class ensures the following rules:
- * <ul>
- *   <li>The initial balance must not be negative.</li>
- *   <li>Deposits and withdrawals must be positive values.</li>
- *   <li>Withdrawals must not exceed the current balance.</li>
- * </ul>
- */
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
 public class BankAccountService {
+    public enum TransactionType {
+        DEPOSIT, WITHDRAWAL
+    }
 
-    /** The current balance of the account. */
+    public static class Transaction {
+        private final TransactionType type;
+        private final double amount;
+        private final LocalDateTime timestamp;
+
+        public Transaction(TransactionType type, double amount) {
+            this.type = type;
+            this.amount = amount;
+            this.timestamp = LocalDateTime.now();
+        }
+
+        public TransactionType getType() {
+            return type;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public LocalDateTime getTimestamp() {
+            return timestamp;
+        }
+    }
+
+    private final String accountId;
     private double balance;
+    private final List<Transaction> transactions;
 
-    /**
-     * Constructs a new {@code BankAccountService} with the specified initial balance.
-     *
-     * @param initialBalance the starting balance of the account
-     * @throws IllegalArgumentException if {@code initialBalance} is negative
-     */
     public BankAccountService(double initialBalance) {
         if (initialBalance < 0) {
             throw new IllegalArgumentException("Initial balance cannot be negative");
         }
+        this.accountId = UUID.randomUUID().toString();
         this.balance = initialBalance;
+        this.transactions = new ArrayList<>();
     }
 
-    /**
-     * Deposits the specified amount into the account.
-     *
-     * @param amount the amount to deposit
-     * @return the new balance after deposit
-     * @throws IllegalArgumentException if {@code amount} is zero or negative
-     */
-    public double deposit(double amount) {
-        if (amount < 0) {  // instead of <=
-            throw new IllegalArgumentException("Deposit must be positive");
-        }
-        balance += amount;
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public double getBalance() {
         return balance;
     }
 
-    /**
-     * Withdraws the specified amount from the account.
-     *
-     * @param amount the amount to withdraw
-     * @return the new balance after withdrawal
-     * @throws IllegalArgumentException if {@code amount} is zero or negative,
-     *                                  or if there are insufficient funds
-     */
+    public List<Transaction> getTransactions() {
+        return Collections.unmodifiableList(transactions);
+    }
+
+    public double deposit(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Deposit must be positive");
+        }
+        balance += amount;
+        transactions.add(new Transaction(TransactionType.DEPOSIT, amount));
+        return balance;
+    }
+
     public double withdraw(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Withdraw must be positive");
@@ -60,15 +77,19 @@ public class BankAccountService {
             throw new IllegalArgumentException("Insufficient funds");
         }
         balance -= amount;
+        transactions.add(new Transaction(TransactionType.WITHDRAWAL, amount));
         return balance;
     }
 
-    /**
-     * Returns the current balance of the account.
-     *
-     * @return the current account balance
-     */
-    public double getBalance() {
-        return balance;
+    public List<Transaction> getRecentTransactions(int n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException("Number of transactions must be positive");
+        }
+        int start = Math.max(transactions.size() - n, 0);
+        return transactions.subList(start, transactions.size());
+    }
+
+    public boolean isOverdrawn() {
+        return balance < 0;
     }
 }
