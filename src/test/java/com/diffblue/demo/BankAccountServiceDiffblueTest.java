@@ -356,6 +356,38 @@ class BankAccountServiceDiffblueTest {
     }
 
     /**
+     * Test {@link BankAccountService#hasSufficientFunds(double)}.
+     * <ul>
+     *   <li>Then return {@code false}.</li>
+     * </ul>
+     * <p>
+     * Method under test: {@link BankAccountService#hasSufficientFunds(double)}
+     */
+    @Test
+    @DisplayName("Test hasSufficientFunds(double); then return 'false'")
+    @Tag("MaintainedByDiffblue")
+    void testHasSufficientFunds_thenReturnFalse() {
+        // Arrange, Act and Assert
+        assertFalse(new BankAccountService(Double.NaN).hasSufficientFunds(10.0d));
+    }
+
+    /**
+     * Test {@link BankAccountService#hasSufficientFunds(double)}.
+     * <ul>
+     *   <li>Then return {@code true}.</li>
+     * </ul>
+     * <p>
+     * Method under test: {@link BankAccountService#hasSufficientFunds(double)}
+     */
+    @Test
+    @DisplayName("Test hasSufficientFunds(double); then return 'true'")
+    @Tag("MaintainedByDiffblue")
+    void testHasSufficientFunds_thenReturnTrue() {
+        // Arrange, Act and Assert
+        assertTrue(new BankAccountService(10.0d).hasSufficientFunds(10.0d));
+    }
+
+    /**
      * Test {@link BankAccountService#getBalance()}.
      * <p>
      * Method under test: {@link BankAccountService#getBalance()}
