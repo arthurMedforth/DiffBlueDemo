@@ -39,10 +39,10 @@ Having read about the approach Diffblue takes, I understood that it doesn’t ha
 
 Diffblue offers an automatic testing solution which is deterministic - a feature that GenAI cannot yet provide, hence its use in CI/CD pipelines. It would be great to understand more about how the founders/wider team view how Diffblue should be used into the future - is it the go-to for test creation in collaboration with GenAI (Cursor/Copilot) that can spot behavioural errors in code?
 
-One last suggestion would be that it would be good to see the IntelliJ plugin support automatic or templated commit messages when Diffblue tests are generated. When creating multiple test cases, it's time-consuming to write unique messages for each one. Auto-summarizing the class and method names being tested would really help streamline the workflow.
-
 ## Summary
 In addition to the points mentioned above, Diffblue Cover stands out for its speed - it generates tests quickly, even for larger classes, making it practical for use during regular development cycles. The tests it creates are well-structured and readable (I had time to review the javadocs generated after creating the tests too), following consistent patterns that make them easy to understand and maintain. It also handles edge cases thoroughly and often includes multiple test methods for a single function, covering a range of inputs. This level of detail and speed helps developers catch regressions early without slowing down their workflow.
+
+One last suggestion would be that it would be good to see the IntelliJ plugin support automatic or templated commit messages when Diffblue tests are generated. When creating multiple test cases, it's time-consuming to write unique messages for each one. Auto-summarizing the class and method names being tested would really help streamline the workflow.
 
 ## Questions
 
