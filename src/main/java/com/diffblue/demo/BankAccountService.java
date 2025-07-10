@@ -92,4 +92,8 @@ public class BankAccountService {
     public boolean isOverdrawn() {
         return balance < 0;
     }
+
+    public boolean hasSufficientFunds(double amount) {
+        return amount >= balance;
+    }
 }
